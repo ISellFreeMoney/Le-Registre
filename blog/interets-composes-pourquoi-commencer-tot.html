@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intérêts composés : pourquoi six mois d'avance changent tout sur 20 ans — Le Registre</title>
+<meta name="description" content="Repousser le début d'une épargne régulière de quelques mois semble anodin. Sur le long terme, c'est pourtant l'un des arbitrages les plus coûteux qu'on puisse faire sans s'en rendre compte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --paper: #F7F4ED;
+    --paper-line: #E4DECE;
+    --ink: #1C2B24;
+    --ink-soft: #44524A;
+    --rust: #C65D3B;
+    --rust-dark: #A8492C;
+    --sage: #8A9B7E;
+    --gold: #D4A857;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif;
+    font-size: 16px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; pointer-events: none;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(28,43,36,0.025) 28px);
+    z-index: 1;
+  }
+  .display { font-family: 'Fraunces', 'Georgia', serif; font-optical-sizing: auto; }
+  .mono { font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; }
+  a { color: inherit; text-decoration: none; }
+  header { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--paper-line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 32px; max-width: 1140px; margin: 0 auto; }
+  .logo { display: flex; align-items: baseline; gap: 10px; }
+  .logo-mark {
+    width: 30px; height: 30px; border: 1.5px solid var(--ink); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; flex-shrink: 0;
+  }
+  .logo-text { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 36px; font-size: 14.5px; color: var(--ink-soft); }
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links .nav-cta { color: var(--ink); border-bottom: 1.5px solid var(--gold); padding-bottom: 2px; }
+  @media (max-width: 720px) { .nav-links { display: none; } }
+  .breadcrumb {
+    max-width: 760px; margin: 0 auto; padding: 22px 32px 0;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--ink-soft);
+    position: relative; z-index: 2;
+  }
+  .breadcrumb a:hover { color: var(--rust); }
+  .breadcrumb .sep { margin: 0 8px; color: var(--paper-line); }
+  .breadcrumb .current { color: var(--ink); }
+  footer { border-top: 1px solid var(--paper-line); position: relative; z-index: 2; }
+  .footer-inner {
+    max-width: 1140px; margin: 0 auto; padding: 48px 32px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-left { display: flex; align-items: baseline; gap: 10px; color: var(--ink-soft); font-size: 13.5px; }
+  .footer-links { display: flex; gap: 28px; font-size: 13.5px; color: var(--ink-soft); }
+  .footer-links a:hover { color: var(--rust); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+
+
+  .article-head { max-width: 760px; margin: 0 auto; padding: 34px 32px 48px; position: relative; z-index: 2; }
+
+  .article-eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--rust); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .article-eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--rust); border-radius: 50%; display: inline-block; }
+
+  .article-title { font-size: clamp(28px, 4.4vw, 44px); line-height: 1.14; font-weight: 500; }
+
+  .article-meta {
+    margin-top: 18px; display: flex; gap: 18px; font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px; color: var(--ink-soft);
+  }
+
+  .article-body { max-width: 760px; margin: 0 auto; padding: 0 32px 70px; position: relative; z-index: 2; }
+
+  .article-h2 { font-size: clamp(21px, 2.6vw, 26px); font-weight: 500; margin: 40px 0 16px; line-height: 1.25; }
+  .article-body .article-h2:first-child { margin-top: 0; }
+
+  .article-p { font-size: 16px; color: var(--ink-soft); line-height: 1.75; margin-bottom: 18px; }
+
+  .article-tool-card {
+    margin-top: 48px; border: 1px solid var(--ink); padding: 28px;
+    display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+
+  .article-tool-label { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--sage); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .article-tool-title { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; }
+
+  .article-tool-btn {
+    background: var(--ink); color: var(--paper); padding: 12px 22px;
+    font-size: 14px; font-weight: 500; white-space: nowrap;
+  }
+  .article-tool-btn:hover { background: var(--rust-dark); }
+
+  .article-back { margin-top: 56px; }
+  .article-back a { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-soft); }
+  .article-back a:hover { color: var(--rust); }
+</style>
+</head>
+<body>
+
+
+<header>
+  <div class="nav">
+    <a href="../index.html" class="logo">
+      <div class="logo-mark">R</div>
+      <div class="logo-text">Le Registre</div>
+    </a>
+    <nav class="nav-links">
+      <a href="../index.html#outils">Les outils</a>
+      <a href="index.html">Le journal</a>
+      <a href="../index.html#abonnement" class="nav-cta">Recevoir les nouveaux outils</a>
+    </nav>
+  </div>
+</header>
+
+
+<div class="breadcrumb">
+  <a href="../index.html">Le registre</a><span class="sep">/</span><a href="index.html">Le journal</a><span class="sep">/</span><span class="current">Intérêts composés : pourquoi six mois d'avance changent tout sur 20 ans</span>
+</div>
+
+<section class="article-head">
+  <div class="article-eyebrow">B-03 · Journal</div>
+  <h1 class="article-title display">Intérêts composés : pourquoi six mois d'avance changent tout sur 20 ans</h1>
+  <div class="article-meta">
+    <span>9 juin 2026</span>
+    <span>·</span>
+    <span>5 min de lecture</span>
+  </div>
+</section>
+
+<article class="article-body">
+<p class="article-p">L'idée des intérêts composés est connue de tous, mais son effet réel sur des décennies reste difficile à visualiser sans poser des chiffres concrets. La phrase « les intérêts produisent eux-mêmes des intérêts » paraît abstraite, jusqu'à ce qu'on regarde ce qu'elle représente sur 15 ou 20 ans d'épargne régulière.</p>
+<h2 class="article-h2 display">Un effet qui s'accélère avec le temps</h2>
+<p class="article-p">Sur les premières années d'une épargne régulière, les intérêts générés sont modestes : la majorité du capital final provient simplement de ce qu'on a versé. Mais plus la durée s'allonge, plus la part des intérêts composés grandit, jusqu'à devenir parfois supérieure à la somme totale versée. C'est cette accélération, presque invisible au début, qui rend le facteur temps si déterminant.</p>
+<h2 class="article-h2 display">Pourquoi six mois de retard coûtent plus qu'on ne le pense</h2>
+<p class="article-p">Reporter le début d'une épargne de six mois ne fait pas que retarder six mensualités de versement. Ces six mois manquants, c'est aussi six mois d'intérêts en moins sur cette somme, et les intérêts sur ces intérêts, répétés chaque année jusqu'à l'échéance finale. Sur un horizon de 20 ans, ce retard initial peut représenter plusieurs centaines, voire milliers d'euros de capital final manquant, simplement parce que la machine a démarré plus tard.</p>
+<h2 class="article-h2 display">Le montant compte moins que la régularité</h2>
+<p class="article-p">Une erreur fréquente consiste à attendre d'avoir une grosse somme disponible avant de commencer à épargner. Or commencer avec un petit versement régulier dès maintenant produit souvent un meilleur résultat à long terme que d'attendre d'avoir réuni un capital plus confortable pour s'y mettre « sérieusement ». Le temps de composition pèse plus lourd que le montant de départ dans la plupart des scénarios réalistes.</p>
+<h2 class="article-h2 display">Visualiser avant de décider</h2>
+<p class="article-p">Il est difficile d'arbitrer entre consommer maintenant et épargner pour plus tard sans avoir une idée concrète de ce que représente chaque mois de différence. Le calculateur d'épargne du Registre permet de tester plusieurs scénarios de durée et de montant pour visualiser la part que prennent les intérêts composés dans le capital final, et ainsi mesurer le vrai coût d'un report dans le temps.</p>
+
+  <div class="article-tool-card">
+    <div>
+      <div class="article-tool-label">Outil lié à cet article</div>
+      <div class="article-tool-title display">Calculateur d'épargne</div>
+    </div>
+    <a href="../calculateur-epargne.html" class="article-tool-btn">Ouvrir l'outil →</a>
+  </div>
+
+  <div class="article-back">
+    <a href="index.html">← Retour au journal</a>
+  </div>
+</article>
+
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="display" style="font-size:15px; color: var(--ink);">Le Registre</span>
+      <span>— outils de calcul pour indépendants</span>
+    </div>
+    <div class="footer-links">
+      <a href="../index.html#outils">Les outils</a>
+      <a href="index.html">Le journal</a>
+      <a href="../mentions-legales.html">Mentions légales</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>

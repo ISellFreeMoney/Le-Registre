@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparateur portage salarial — Le Registre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F4ED;
+    --paper-line: #E4DECE;
+    --ink: #1C2B24;
+    --ink-soft: #44524A;
+    --rust: #C65D3B;
+    --rust-dark: #A8492C;
+    --sage: #8A9B7E;
+    --gold: #D4A857;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(28,43,36,0.025) 28px);
+    z-index: 1;
+  }
+
+  .display { font-family: 'Fraunces', 'Georgia', serif; font-optical-sizing: auto; }
+  .mono { font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; }
+
+  a { color: inherit; text-decoration: none; }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--paper);
+    border-bottom: 1px solid var(--paper-line);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 32px;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .logo { display: flex; align-items: baseline; gap: 10px; }
+
+  .logo-mark {
+    width: 30px; height: 30px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .logo-text { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; letter-spacing: -0.01em; }
+
+  .nav-links { display: flex; gap: 36px; font-size: 14.5px; color: var(--ink-soft); }
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links .nav-cta { color: var(--ink); border-bottom: 1.5px solid var(--gold); padding-bottom: 2px; }
+
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  .breadcrumb {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 22px 32px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    position: relative;
+    z-index: 2;
+  }
+
+  .breadcrumb a:hover { color: var(--rust); }
+  .breadcrumb .sep { margin: 0 8px; color: var(--paper-line); }
+  .breadcrumb .current { color: var(--ink); }
+
+  .tool-head {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 34px 32px 56px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tool-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tool-eyebrow::before {
+    content: "";
+    width: 7px; height: 7px;
+    background: var(--rust);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .tool-title {
+    font-size: clamp(32px, 4.6vw, 50px);
+    line-height: 1.08;
+    font-weight: 500;
+    max-width: 700px;
+  }
+
+  .tool-sub {
+    margin-top: 18px;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .tool-body {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 32px 70px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 32px;
+    margin-bottom: 40px;
+  }
+
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px dashed var(--ink-soft);
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+  }
+
+  .panel-head-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; }
+  .panel-head-ref { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft); }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  @media (max-width: 720px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  .field { margin-bottom: 22px; }
+
+  .field label {
+    display: block;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+
+  .field-input-row {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--ink);
+    background: #fff;
+  }
+
+  .field-input-row input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 13px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    color: var(--ink);
+    outline: none;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .field-input-row .unit {
+    padding: 0 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-left: 1px solid var(--paper-line);
+    white-space: nowrap;
+  }
+
+  .field-range { margin-top: 10px; }
+  .field-range input[type="range"] { width: 100%; accent-color: var(--rust); }
+
+  .field-range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .field-hint {
+    margin-top: 7px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+
+  /* comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .compare-table th {
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .compare-table th.num, .compare-table td.num { text-align: right; }
+
+  .compare-table td {
+    padding: 18px 16px;
+    border-bottom: 1px solid var(--paper-line);
+    font-size: 14.5px;
+  }
+
+  .compare-table td.num { font-family: 'IBM Plex Mono', monospace; }
+
+  .compare-table tr.highlight td {
+    background: rgba(138,155,126,0.1);
+  }
+
+  .compare-table .profile-name {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .compare-table .profile-tag {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--sage);
+  }
+
+  .compare-table .net-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--rust-dark);
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  .panel-footnote {
+    margin-top: 20px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* method / formula */
+  .section {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 96px 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(26px, 3.2vw, 36px);
+    font-weight: 500;
+    max-width: 560px;
+    line-height: 1.18;
+    margin-bottom: 40px;
+  }
+
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .formula-step {
+    padding: 28px 28px 28px 0;
+    border-left: 1px solid var(--paper-line);
+  }
+
+  .formula-step:first-child { border-left: none; padding-left: 0; }
+  .formula-step:nth-child(2), .formula-step:nth-child(3) { padding-left: 28px; }
+
+  .formula-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--rust);
+    margin-bottom: 10px;
+  }
+
+  .formula-num::before { content: "Étape "; color: var(--ink-soft); }
+
+  .formula-title {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .formula-text {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .formula-code {
+    margin-top: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    background: var(--paper-line);
+    padding: 8px 10px;
+    display: inline-block;
+  }
+
+  @media (max-width: 880px) {
+    .formula-grid { grid-template-columns: 1fr; }
+    .formula-step, .formula-step:nth-child(2), .formula-step:nth-child(3) {
+      border-left: none;
+      border-top: 1px solid var(--paper-line);
+      padding: 28px 0;
+    }
+    .formula-step:first-child { border-top: none; }
+  }
+
+  /* FAQ */
+  .faq-list { border-top: 1px solid var(--ink); }
+
+  .faq-item {
+    border-bottom: 1px solid var(--paper-line);
+    padding: 24px 0;
+    cursor: pointer;
+  }
+
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 500;
+  }
+
+  .faq-q .mark {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    color: var(--rust);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .faq-item.open .mark { transform: rotate(45deg); }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    transition: max-height 0.25s ease;
+  }
+
+  .faq-item.open .faq-a { max-height: 300px; margin-top: 14px; }
+
+  /* related */
+  .related { background: var(--ink); color: var(--paper); position: relative; z-index: 2; }
+
+  .related-inner { max-width: 1140px; margin: 0 auto; padding: 80px 32px; }
+
+  .related .section-eyebrow { color: var(--gold); }
+
+  .related-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(247,244,237,0.15);
+  }
+
+  .related-card { background: var(--ink); padding: 26px; }
+  .related-card a { display: block; }
+
+  .related-card-folio {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .related-card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+
+  .related-card-text { font-size: 13px; color: #C8D0C9; line-height: 1.55; }
+
+  @media (max-width: 880px) { .related-grid { grid-template-columns: 1fr; } }
+
+  footer { border-top: 1px solid var(--paper-line); position: relative; z-index: 2; }
+
+  .footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-left { display: flex; align-items: baseline; gap: 10px; color: var(--ink-soft); font-size: 13.5px; }
+  .footer-links { display: flex; gap: 28px; font-size: 13.5px; color: var(--ink-soft); }
+  .footer-links a:hover { color: var(--rust); }
+
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--rust);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">R</div>
+      <div class="logo-text">Le Registre</div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#outils">Les outils</a>
+      <a href="index.html#methode">La méthode</a>
+      <a href="blog/index.html">Le journal</a>
+      <a href="index.html#abonnement" class="nav-cta">Recevoir les nouveaux outils</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Le registre</a><span class="sep">/</span><span class="current">Fol. 02 — Comparateur portage salarial</span>
+</div>
+
+<section class="tool-head">
+  <div class="tool-eyebrow">Fol. 02 · Disponible</div>
+  <h1 class="tool-title display">Comparateur portage salarial</h1>
+  <p class="tool-sub">Entrez votre TJM et vos jours travaillés pour estimer votre salaire net selon trois profils de frais de gestion représentatifs du marché.</p>
+</section>
+
+<div class="tool-body">
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-head-title display">Vos paramètres</span>
+      <span class="panel-head-ref mono">Saisie</span>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="tjm">TJM facturé au client</label>
+        <div class="field-input-row">
+          <input type="number" id="tjm" value="400" min="0" step="10">
+          <span class="unit">€ / jour</span>
+        </div>
+        <div class="field-hint">Le tarif hors taxes que vous facturez pour une journée de mission.</div>
+      </div>
+
+      <div class="field">
+        <label for="joursP">Jours travaillés par mois</label>
+        <div class="field-input-row">
+          <input type="number" id="joursP" value="18" min="1" max="22" step="1">
+          <span class="unit">j / mois</span>
+        </div>
+        <div class="field-hint">Nombre de jours de mission facturés sur le mois.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-head-title display">Résultat par profil de frais de gestion</span>
+      <span class="panel-head-ref mono">Fol. 02</span>
+    </div>
+
+    <div class="table-scroll">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Profil</th>
+            <th class="num">Frais de gestion</th>
+            <th class="num">CA facturé</th>
+            <th class="num">Après frais</th>
+            <th class="num">Salaire net estimé</th>
+          </tr>
+        </thead>
+        <tbody id="compare-body">
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel-footnote">
+      Salaire net estimé après cotisations sociales (charges salariales et patronales d'environ 48 % du montant après frais de gestion, moyenne du secteur du portage salarial). Les taux réels varient selon la société de portage, le statut cadre/non-cadre, et les options de mutuelle ou prévoyance choisies.
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-eyebrow">La formule</div>
+  <h2 class="section-title display">Trois étapes, du TJM au net.</h2>
+
+  <div class="formula-grid">
+    <div class="formula-step">
+      <div class="formula-num mono">1</div>
+      <div class="formula-title display">Chiffre d'affaires facturé</div>
+      <div class="formula-text">Le TJM est multiplié par le nombre de jours travaillés pour obtenir le montant facturé au client sur le mois.</div>
+      <div class="formula-code mono">CA = TJM × jours</div>
+    </div>
+    <div class="formula-step">
+      <div class="formula-num mono">2</div>
+      <div class="formula-title display">Frais de gestion retirés</div>
+      <div class="formula-text">La société de portage prélève ses frais de gestion sur le CA facturé, avant tout calcul de cotisations.</div>
+      <div class="formula-code mono">reste = CA × (1 − frais)</div>
+    </div>
+    <div class="formula-step">
+      <div class="formula-num mono">3</div>
+      <div class="formula-title display">Cotisations sociales</div>
+      <div class="formula-text">Le montant restant après frais de gestion subit les cotisations sociales salariales et patronales pour donner le net.</div>
+      <div class="formula-code mono">net = reste × (1 − cotis.)</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">Questions fréquentes</div>
+  <h2 class="section-title display">Ce que les indépendants demandent le plus souvent.</h2>
+
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q"><span>Pourquoi les frais de gestion varient autant entre sociétés de portage ?</span><span class="mark">+</span></div>
+      <div class="faq-a">Les frais de gestion couvrent l'administratif (paie, contrats, facturation), l'accompagnement, et parfois des services additionnels (formation, mutuelle incluse, club d'affaires). Une société avec des frais plus élevés peut compenser par un meilleur accompagnement commercial ou des garanties supplémentaires : le taux seul ne suffit pas à comparer deux offres.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Le taux de cotisations sociales est-il le même pour tout le monde ?</span><span class="mark">+</span></div>
+      <div class="faq-a">Non. Il dépend du statut (cadre ou non-cadre), de la caisse de retraite complémentaire, et des options choisies (mutuelle, prévoyance). Le taux de 48 % utilisé ici est une moyenne couramment citée dans le secteur, mais peut varier de quelques points selon votre situation exacte.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Le portage salarial donne-t-il droit au chômage ?</span><span class="mark">+</span></div>
+      <div class="faq-a">Oui, c'est l'un des principaux arguments du portage : en tant que salarié porté, vous cotisez à l'assurance chômage comme un salarié classique, ce qui n'est pas le cas en micro-entreprise ou en société individuelle.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Existe-t-il un TJM minimum pour faire du portage salarial ?</span><span class="mark">+</span></div>
+      <div class="faq-a">La plupart des sociétés de portage imposent un seuil, souvent autour de 250 à 300 € de TJM, pour que le montage reste viable une fois les frais et cotisations déduits, et pour respecter le salaire minimum conventionnel du secteur.</div>
+    </div>
+  </div>
+</section>
+
+<div class="related">
+  <div class="related-inner">
+    <div class="section-eyebrow">À consulter aussi</div>
+    <h2 class="related-title display">Les autres instruments du registre.</h2>
+    <div class="related-grid">
+      <div class="related-card">
+        <a href="calculateur-tjm.html">
+          <div class="related-card-folio mono">Fol. 01</div>
+          <div class="related-card-title display">Simulateur de TJM</div>
+          <div class="related-card-text">Calculez votre taux journalier moyen à partir du salaire visé, des charges et des jours facturables.</div>
+        </a>
+      </div>
+      <div class="related-card">
+        <a href="calculateur-epargne.html">
+          <div class="related-card-folio mono">Fol. 03</div>
+          <div class="related-card-title display">Calculateur d'épargne</div>
+          <div class="related-card-text">Projetez la croissance d'une épargne régulière avec intérêts composés, mois par mois.</div>
+        </a>
+      </div>
+      <div class="related-card">
+        <a href="simulateur-mensualites.html">
+          <div class="related-card-folio mono">Fol. 04</div>
+          <div class="related-card-title display">Simulateur de mensualités</div>
+          <div class="related-card-text">Calculez la mensualité d'un prêt selon montant, taux et durée, avec tableau d'amortissement.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="display" style="font-size:15px; color: var(--ink);">Le Registre</span>
+      <span>— outils de calcul pour indépendants</span>
+    </div>
+    <div class="footer-links">
+      <a href="index.html#outils">Les outils</a>
+      <a href="index.html#methode">La méthode</a>
+      <a href="blog/index.html">Le journal</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const profiles = [
+    { name: "Frais réduits", tag: "≈ 5 %", frais: 0.05 },
+    { name: "Frais standards", tag: "≈ 8 %", frais: 0.08, highlight: true },
+    { name: "Frais élevés", tag: "≈ 10 %", frais: 0.10 }
+  ];
+  const COTISATIONS = 0.48;
+
+  function formatEUR(n) {
+    return Math.round(n).toLocaleString('fr-FR') + ' €';
+  }
+
+  function render() {
+    const tjm = parseFloat(document.getElementById('tjm').value) || 0;
+    const jours = parseFloat(document.getElementById('joursP').value) || 0;
+    const ca = tjm * jours;
+
+    const body = document.getElementById('compare-body');
+    body.innerHTML = '';
+
+    profiles.forEach(p => {
+      const apresFrais = ca * (1 - p.frais);
+      const net = apresFrais * (1 - COTISATIONS);
+
+      const tr = document.createElement('tr');
+      if (p.highlight) tr.className = 'highlight';
+
+      tr.innerHTML = `
+        <td>
+          <div class="profile-name display">${p.name}</div>
+          <span class="profile-tag mono">${p.tag} de frais</span>
+        </td>
+        <td class="num mono">${(p.frais * 100).toFixed(0)} %</td>
+        <td class="num mono">${formatEUR(ca)}</td>
+        <td class="num mono">${formatEUR(apresFrais)}</td>
+        <td class="num net-value mono">${formatEUR(net)}</td>
+      `;
+      body.appendChild(tr);
+    });
+  }
+
+  document.getElementById('tjm').addEventListener('input', render);
+  document.getElementById('joursP').addEventListener('input', render);
+  render();
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

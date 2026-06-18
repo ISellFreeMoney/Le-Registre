@@ -1,0 +1,20 @@
+{
+  "slug": "interets-composes-pourquoi-commencer-tot",
+  "title": "Intérêts composés : pourquoi six mois d'avance changent tout sur 20 ans",
+  "excerpt": "Repousser le début d'une épargne régulière de quelques mois semble anodin. Sur le long terme, c'est pourtant l'un des arbitrages les plus coûteux qu'on puisse faire sans s'en rendre compte.",
+  "date": "2026-06-09",
+  "readingTime": "5 min",
+  "folio": "B-03",
+  "relatedTool": { "href": "calculateur-epargne.html", "label": "Calculateur d'épargne" },
+  "content": [
+    { "type": "p", "text": "L'idée des intérêts composés est connue de tous, mais son effet réel sur des décennies reste difficile à visualiser sans poser des chiffres concrets. La phrase « les intérêts produisent eux-mêmes des intérêts » paraît abstraite, jusqu'à ce qu'on regarde ce qu'elle représente sur 15 ou 20 ans d'épargne régulière." },
+    { "type": "h2", "text": "Un effet qui s'accélère avec le temps" },
+    { "type": "p", "text": "Sur les premières années d'une épargne régulière, les intérêts générés sont modestes : la majorité du capital final provient simplement de ce qu'on a versé. Mais plus la durée s'allonge, plus la part des intérêts composés grandit, jusqu'à devenir parfois supérieure à la somme totale versée. C'est cette accélération, presque invisible au début, qui rend le facteur temps si déterminant." },
+    { "type": "h2", "text": "Pourquoi six mois de retard coûtent plus qu'on ne le pense" },
+    { "type": "p", "text": "Reporter le début d'une épargne de six mois ne fait pas que retarder six mensualités de versement. Ces six mois manquants, c'est aussi six mois d'intérêts en moins sur cette somme, et les intérêts sur ces intérêts, répétés chaque année jusqu'à l'échéance finale. Sur un horizon de 20 ans, ce retard initial peut représenter plusieurs centaines, voire milliers d'euros de capital final manquant, simplement parce que la machine a démarré plus tard." },
+    { "type": "h2", "text": "Le montant compte moins que la régularité" },
+    { "type": "p", "text": "Une erreur fréquente consiste à attendre d'avoir une grosse somme disponible avant de commencer à épargner. Or commencer avec un petit versement régulier dès maintenant produit souvent un meilleur résultat à long terme que d'attendre d'avoir réuni un capital plus confortable pour s'y mettre « sérieusement ». Le temps de composition pèse plus lourd que le montant de départ dans la plupart des scénarios réalistes." },
+    { "type": "h2", "text": "Visualiser avant de décider" },
+    { "type": "p", "text": "Il est difficile d'arbitrer entre consommer maintenant et épargner pour plus tard sans avoir une idée concrète de ce que représente chaque mois de différence. Le calculateur d'épargne du Registre permet de tester plusieurs scénarios de durée et de montant pour visualiser la part que prennent les intérêts composés dans le capital final, et ainsi mesurer le vrai coût d'un report dans le temps." }
+  ]
+}

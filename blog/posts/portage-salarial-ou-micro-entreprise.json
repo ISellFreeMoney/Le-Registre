@@ -1,0 +1,21 @@
+{
+  "slug": "portage-salarial-ou-micro-entreprise",
+  "title": "Portage salarial ou micro-entreprise : ce qui change vraiment sur le revenu net",
+  "excerpt": "Les deux statuts visent le même objectif, facturer une prestation, mais ne traitent pas du tout pareil les cotisations, les frais et la protection sociale. Voici où regarder avant de choisir.",
+  "date": "2026-05-26",
+  "readingTime": "7 min",
+  "folio": "B-02",
+  "relatedTool": { "href": "portage-salarial.html", "label": "Comparateur portage salarial" },
+  "content": [
+    { "type": "p", "text": "Beaucoup d'indépendants choisissent leur statut par habitude ou par recommandation d'un proche, sans vraiment comparer l'impact sur ce qui finit sur le compte en banque chaque mois. Pourtant, à TJM identique, l'écart de revenu net entre micro-entreprise et portage salarial peut représenter plusieurs centaines d'euros par mois." },
+    { "type": "h2", "text": "Des taux de charges très différents" },
+    { "type": "p", "text": "En micro-entreprise, les cotisations sociales tournent généralement entre 22 et 24 % du chiffre d'affaires encaissé, selon l'activité exercée. En portage salarial, il faut ajouter aux cotisations sociales classiques de salarié (autour de 45-50 % du salaire brut) les frais de gestion de la société de portage, souvent entre 5 et 10 % du chiffre d'affaires facturé. Le total se rapproche alors plus souvent de 45 à 50 % du chiffre d'affaires brut." },
+    { "type": "p", "text": "Sur le papier, la micro-entreprise semble donc nettement plus avantageuse en net perçu. Mais ce calcul ne raconte qu'une partie de l'histoire." },
+    { "type": "h2", "text": "Ce que le portage salarial inclut que la micro-entreprise n'a pas" },
+    { "type": "p", "text": "Le statut de salarié porté donne accès à l'assurance chômage, à une retraite calculée comme celle d'un salarié classique, et à une couverture sociale plus complète. Un consultant en micro-entreprise ne cotise pas à l'assurance chômage et a une retraite moins avantageuse à cotisations égales. La différence de charges n'est donc pas qu'une question de pourcentage : c'est aussi un arbitrage entre revenu immédiat et protection sociale future." },
+    { "type": "h2", "text": "Le plafond de chiffre d'affaires, un vrai facteur de choix" },
+    { "type": "p", "text": "La micro-entreprise impose un plafond de chiffre d'affaires annuel (autour de 77 700 € pour les prestations de services en 2025-2026, sous réserve des évolutions réglementaires). Au-delà, il faut basculer vers un autre régime fiscal, avec une comptabilité plus complexe. Le portage salarial n'impose pas ce type de plafond, ce qui en fait une option plus naturelle pour les indépendants à TJM élevé ou enchaînant les missions longues." },
+    { "type": "h2", "text": "Comparer plutôt que deviner" },
+    { "type": "p", "text": "Le bon réflexe n'est pas de choisir un statut par défaut, mais de simuler son revenu net réel selon son TJM et son volume d'activité prévisionnel. Le comparateur portage salarial du Registre permet de visualiser l'impact de différents niveaux de frais de gestion sur le net perçu, pour avoir un ordre de grandeur avant d'aller plus loin dans les démarches administratives." }
+  ]
+}

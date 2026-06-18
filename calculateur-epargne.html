@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculateur d'épargne — Le Registre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F7F4ED;
+    --paper-line: #E4DECE;
+    --ink: #1C2B24;
+    --ink-soft: #44524A;
+    --rust: #C65D3B;
+    --rust-dark: #A8492C;
+    --sage: #8A9B7E;
+    --gold: #D4A857;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(28,43,36,0.025) 28px);
+    z-index: 1;
+  }
+
+  .display { font-family: 'Fraunces', 'Georgia', serif; font-optical-sizing: auto; }
+  .mono { font-family: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace; }
+
+  a { color: inherit; text-decoration: none; }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--paper);
+    border-bottom: 1px solid var(--paper-line);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 32px;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+
+  .logo { display: flex; align-items: baseline; gap: 10px; }
+
+  .logo-mark {
+    width: 30px; height: 30px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .logo-text { font-family: 'Fraunces', serif; font-size: 21px; font-weight: 600; letter-spacing: -0.01em; }
+
+  .nav-links { display: flex; gap: 36px; font-size: 14.5px; color: var(--ink-soft); }
+  .nav-links a:hover { color: var(--rust); }
+  .nav-links .nav-cta { color: var(--ink); border-bottom: 1.5px solid var(--gold); padding-bottom: 2px; }
+
+  @media (max-width: 720px) { .nav-links { display: none; } }
+
+  .breadcrumb {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 22px 32px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    position: relative;
+    z-index: 2;
+  }
+
+  .breadcrumb a:hover { color: var(--rust); }
+  .breadcrumb .sep { margin: 0 8px; color: var(--paper-line); }
+  .breadcrumb .current { color: var(--ink); }
+
+  .tool-head {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 34px 32px 56px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .tool-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tool-eyebrow::before {
+    content: "";
+    width: 7px; height: 7px;
+    background: var(--rust);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .tool-title {
+    font-size: clamp(32px, 4.6vw, 50px);
+    line-height: 1.08;
+    font-weight: 500;
+    max-width: 700px;
+  }
+
+  .tool-sub {
+    margin-top: 18px;
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 580px;
+    line-height: 1.6;
+  }
+
+  .tool-body {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 32px 70px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    position: relative;
+    z-index: 2;
+    border-bottom: 1px solid var(--paper-line);
+  }
+
+  @media (max-width: 880px) { .tool-body { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 32px;
+  }
+
+  .panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px dashed var(--ink-soft);
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+  }
+
+  .panel-head-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; }
+  .panel-head-ref { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-soft); }
+
+  .field { margin-bottom: 22px; }
+  .field label { display: block; font-size: 13.5px; color: var(--ink-soft); margin-bottom: 8px; }
+
+  .field-input-row {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--ink);
+    background: #fff;
+  }
+
+  .field-input-row input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 13px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    color: var(--ink);
+    outline: none;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .field-input-row .unit {
+    padding: 0 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-left: 1px solid var(--paper-line);
+    white-space: nowrap;
+  }
+
+  .field-range { margin-top: 10px; }
+  .field-range input[type="range"] { width: 100%; accent-color: var(--rust); }
+
+  .field-range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .field-hint { margin-top: 7px; font-size: 12.5px; color: var(--ink-soft); }
+
+  /* result panel */
+  .result-panel {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .result-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px dashed rgba(247,244,237,0.25);
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+  }
+
+  .result-head-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 500; }
+  .result-head-ref { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--gold); }
+
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13.5px;
+    padding: 10px 0;
+    color: #C8D0C9;
+    border-bottom: 1px solid rgba(247,244,237,0.08);
+  }
+
+  .result-row span:last-child { font-family: 'IBM Plex Mono', monospace; color: var(--paper); }
+
+  .result-main { margin-top: 28px; padding-top: 24px; }
+
+  .result-main-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .result-main-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(40px, 6vw, 56px);
+    font-weight: 600;
+    margin-top: 8px;
+    line-height: 1;
+  }
+
+  .result-main-sub { margin-top: 10px; font-size: 13.5px; color: #C8D0C9; }
+
+  .result-bar-wrap {
+    margin-top: 24px;
+  }
+
+  .result-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 2px;
+    overflow: hidden;
+    background: rgba(247,244,237,0.1);
+  }
+
+  .result-bar-segment.principal { background: var(--sage); }
+  .result-bar-segment.interets { background: var(--gold); }
+
+  .result-bar-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: #C8D0C9;
+  }
+
+  .legend-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  .legend-dot.principal { background: var(--sage); }
+  .legend-dot.interets { background: var(--gold); }
+
+  .result-footnote {
+    margin-top: auto;
+    padding-top: 28px;
+    font-size: 13px;
+    color: #C8D0C9;
+    line-height: 1.6;
+  }
+
+  .result-footnote-label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  /* method / formula */
+  .section { max-width: 1140px; margin: 0 auto; padding: 96px 32px; position: relative; z-index: 2; }
+
+  .section-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: clamp(26px, 3.2vw, 36px);
+    font-weight: 500;
+    max-width: 560px;
+    line-height: 1.18;
+    margin-bottom: 40px;
+  }
+
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .formula-step { padding: 28px 28px 28px 0; border-left: 1px solid var(--paper-line); }
+  .formula-step:first-child { border-left: none; padding-left: 0; }
+  .formula-step:nth-child(2), .formula-step:nth-child(3) { padding-left: 28px; }
+
+  .formula-num { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--rust); margin-bottom: 10px; }
+  .formula-num::before { content: "Étape "; color: var(--ink-soft); }
+
+  .formula-title { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+  .formula-text { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+
+  .formula-code {
+    margin-top: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    background: var(--paper-line);
+    padding: 8px 10px;
+    display: inline-block;
+  }
+
+  @media (max-width: 880px) {
+    .formula-grid { grid-template-columns: 1fr; }
+    .formula-step, .formula-step:nth-child(2), .formula-step:nth-child(3) {
+      border-left: none; border-top: 1px solid var(--paper-line); padding: 28px 0;
+    }
+    .formula-step:first-child { border-top: none; }
+  }
+
+  /* FAQ */
+  .faq-list { border-top: 1px solid var(--ink); }
+  .faq-item { border-bottom: 1px solid var(--paper-line); padding: 24px 0; cursor: pointer; }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; }
+  .faq-q .mark { font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: var(--rust); flex-shrink: 0; transition: transform 0.2s ease; }
+  .faq-item.open .mark { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; font-size: 14.5px; color: var(--ink-soft); line-height: 1.65; transition: max-height 0.25s ease; }
+  .faq-item.open .faq-a { max-height: 300px; margin-top: 14px; }
+
+  /* related */
+  .related { background: var(--ink); color: var(--paper); position: relative; z-index: 2; }
+  .related-inner { max-width: 1140px; margin: 0 auto; padding: 80px 32px; }
+  .related .section-eyebrow { color: var(--gold); }
+
+  .related-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 500;
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(247,244,237,0.15); }
+  .related-card { background: var(--ink); padding: 26px; }
+  .related-card a { display: block; }
+
+  .related-card-folio { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: var(--gold); margin-bottom: 12px; }
+  .related-card-title { font-family: 'Fraunces', serif; font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+  .related-card-text { font-size: 13px; color: #C8D0C9; line-height: 1.55; }
+
+  @media (max-width: 880px) { .related-grid { grid-template-columns: 1fr; } }
+
+  footer { border-top: 1px solid var(--paper-line); position: relative; z-index: 2; }
+
+  .footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-left { display: flex; align-items: baseline; gap: 10px; color: var(--ink-soft); font-size: 13.5px; }
+  .footer-links { display: flex; gap: 28px; font-size: 13.5px; color: var(--ink-soft); }
+  .footer-links a:hover { color: var(--rust); }
+
+  a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--rust); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">R</div>
+      <div class="logo-text">Le Registre</div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#outils">Les outils</a>
+      <a href="index.html#methode">La méthode</a>
+      <a href="blog/index.html">Le journal</a>
+      <a href="index.html#abonnement" class="nav-cta">Recevoir les nouveaux outils</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html">Le registre</a><span class="sep">/</span><span class="current">Fol. 03 — Calculateur d'épargne</span>
+</div>
+
+<section class="tool-head">
+  <div class="tool-eyebrow">Fol. 03 · Disponible</div>
+  <h1 class="tool-title display">Calculateur d'épargne</h1>
+  <p class="tool-sub">Projetez la croissance d'une épargne régulière avec intérêts composés : versement initial, apports mensuels, taux annuel et durée.</p>
+</section>
+
+<div class="tool-body">
+  <div class="panel">
+    <div class="panel-head">
+      <span class="panel-head-title display">Vos paramètres</span>
+      <span class="panel-head-ref mono">Saisie</span>
+    </div>
+
+    <div class="field">
+      <label for="capitalInitial">Capital initial</label>
+      <div class="field-input-row">
+        <input type="number" id="capitalInitial" value="1000" min="0" step="100">
+        <span class="unit">€</span>
+      </div>
+      <div class="field-hint">Le montant déjà placé au départ, s'il y en a un.</div>
+    </div>
+
+    <div class="field">
+      <label for="versement">Versement mensuel</label>
+      <div class="field-input-row">
+        <input type="number" id="versement" value="150" min="0" step="10">
+        <span class="unit">€ / mois</span>
+      </div>
+      <div class="field-hint">Le montant que vous ajoutez chaque mois sur le support d'épargne.</div>
+    </div>
+
+    <div class="field">
+      <label for="taux">Taux annuel</label>
+      <div class="field-range">
+        <input type="range" id="taux" min="0" max="10" value="3" step="0.1">
+        <div class="field-range-labels">
+          <span>0 %</span>
+          <span id="taux-val" class="mono">3 %</span>
+          <span>10 %</span>
+        </div>
+      </div>
+      <div class="field-hint">Le rendement annuel net espéré : environ 3 % pour un livret, 5-7 % pour un fonds actions à long terme.</div>
+    </div>
+
+    <div class="field">
+      <label for="duree">Durée de placement</label>
+      <div class="field-range">
+        <input type="range" id="duree" min="1" max="40" value="10" step="1">
+        <div class="field-range-labels">
+          <span>1 an</span>
+          <span id="duree-val" class="mono">10 ans</span>
+          <span>40 ans</span>
+        </div>
+      </div>
+      <div class="field-hint">Le nombre d'années pendant lesquelles vous laissez l'épargne fructifier.</div>
+    </div>
+  </div>
+
+  <div class="result-panel">
+    <div class="result-head">
+      <span class="result-head-title display">Résultat</span>
+      <span class="result-head-ref mono">Fol. 03</span>
+    </div>
+
+    <div class="result-row"><span>Total versé sur la période</span><span id="out-verse">19 000 €</span></div>
+    <div class="result-row"><span>Intérêts générés</span><span id="out-interets">5 920 €</span></div>
+
+    <div class="result-main">
+      <div class="result-main-label">Capital final estimé</div>
+      <div class="result-main-value mono" id="out-total">24 920 €</div>
+      <div class="result-main-sub">Capital initial + versements + intérêts composés.</div>
+    </div>
+
+    <div class="result-bar-wrap">
+      <div class="result-bar">
+        <div class="result-bar-segment principal" id="bar-principal" style="width: 76%;"></div>
+        <div class="result-bar-segment interets" id="bar-interets" style="width: 24%;"></div>
+      </div>
+      <div class="result-bar-legend">
+        <span><span class="legend-dot principal"></span>Versé</span>
+        <span><span class="legend-dot interets"></span>Intérêts</span>
+      </div>
+    </div>
+
+    <div class="result-footnote">
+      <span class="result-footnote-label">À retenir</span>
+      Cette projection ignore l'inflation et la fiscalité (prélèvements sociaux, impôt selon l'enveloppe). Le rendement réel net peut être inférieur à ce qui est affiché ici.
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-eyebrow">La formule</div>
+  <h2 class="section-title display">Trois étapes, aucune boîte noire.</h2>
+
+  <div class="formula-grid">
+    <div class="formula-step">
+      <div class="formula-num mono">1</div>
+      <div class="formula-title display">Capital initial composé</div>
+      <div class="formula-text">Le capital de départ fructifie seul, mois après mois, au taux mensuel équivalent au taux annuel choisi.</div>
+      <div class="formula-code mono">C1 = capital × (1+r)ⁿ</div>
+    </div>
+    <div class="formula-step">
+      <div class="formula-num mono">2</div>
+      <div class="formula-title display">Versements composés</div>
+      <div class="formula-text">Chaque versement mensuel profite lui aussi des intérêts composés sur le temps restant jusqu'à la fin de la période.</div>
+      <div class="formula-code mono">C2 = vers. × [((1+r)ⁿ−1)/r]</div>
+    </div>
+    <div class="formula-step">
+      <div class="formula-num mono">3</div>
+      <div class="formula-title display">Somme des deux</div>
+      <div class="formula-text">Le capital final est la somme du capital initial composé et de la valeur future de tous les versements réguliers.</div>
+      <div class="formula-code mono">Total = C1 + C2</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-eyebrow">Questions fréquentes</div>
+  <h2 class="section-title display">Ce que les épargnants demandent le plus souvent.</h2>
+
+  <div class="faq-list">
+    <div class="faq-item open">
+      <div class="faq-q"><span>Pourquoi les intérêts composés font-ils une telle différence sur la durée ?</span><span class="mark">+</span></div>
+      <div class="faq-a">Parce que les intérêts d'une période génèrent eux-mêmes des intérêts les périodes suivantes. Sur quelques années l'effet semble modeste, mais sur 15 ou 20 ans, une part croissante du capital final provient des intérêts sur les intérêts plutôt que des sommes versées.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Ce calcul prend-il en compte l'inflation ?</span><span class="mark">+</span></div>
+      <div class="faq-a">Non, le résultat est en euros courants. Pour estimer le pouvoir d'achat réel, il faut soustraire l'inflation moyenne attendue du taux de rendement utilisé (par exemple, un taux de 5 % avec 2 % d'inflation équivaut à un rendement réel d'environ 3 %).</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Faut-il tenir compte des impôts sur les intérêts ?</span><span class="mark">+</span></div>
+      <div class="faq-a">Oui, ce simulateur affiche un rendement brut. La fiscalité dépend de l'enveloppe choisie : un livret réglementé (Livret A, LDDS) est exonéré d'impôt, alors qu'une assurance-vie ou un compte-titres applique la flat tax de 30 % ou le barème progressif selon les cas.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Quel taux de rendement est réaliste à utiliser ?</span><span class="mark">+</span></div>
+      <div class="faq-a">Cela dépend entièrement du support : autour de 2,5 à 3 % pour un livret réglementé, 2 à 4 % pour un fonds en euros d'assurance-vie, et historiquement 5 à 7 % en moyenne annualisée pour des unités de compte actions sur le long terme, avec une volatilité bien plus élevée à court terme.</div>
+    </div>
+  </div>
+</section>
+
+<div class="related">
+  <div class="related-inner">
+    <div class="section-eyebrow">À consulter aussi</div>
+    <h2 class="related-title display">Les autres instruments du registre.</h2>
+    <div class="related-grid">
+      <div class="related-card">
+        <a href="calculateur-tjm.html">
+          <div class="related-card-folio mono">Fol. 01</div>
+          <div class="related-card-title display">Simulateur de TJM</div>
+          <div class="related-card-text">Calculez votre taux journalier moyen à partir du salaire visé, des charges et des jours facturables.</div>
+        </a>
+      </div>
+      <div class="related-card">
+        <a href="portage-salarial.html">
+          <div class="related-card-folio mono">Fol. 02</div>
+          <div class="related-card-title display">Comparateur portage salarial</div>
+          <div class="related-card-text">Estimez votre revenu net selon les frais de gestion des sociétés de portage.</div>
+        </a>
+      </div>
+      <div class="related-card">
+        <a href="simulateur-mensualites.html">
+          <div class="related-card-folio mono">Fol. 04</div>
+          <div class="related-card-title display">Simulateur de mensualités</div>
+          <div class="related-card-text">Calculez la mensualité d'un prêt selon montant, taux et durée, avec tableau d'amortissement.</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <span class="display" style="font-size:15px; color: var(--ink);">Le Registre</span>
+      <span>— outils de calcul pour indépendants</span>
+    </div>
+    <div class="footer-links">
+      <a href="index.html#outils">Les outils</a>
+      <a href="index.html#methode">La méthode</a>
+      <a href="blog/index.html">Le journal</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const capitalEl = document.getElementById('capitalInitial');
+  const versementEl = document.getElementById('versement');
+  const tauxEl = document.getElementById('taux');
+  const dureeEl = document.getElementById('duree');
+
+  const tauxVal = document.getElementById('taux-val');
+  const dureeVal = document.getElementById('duree-val');
+
+  const outVerse = document.getElementById('out-verse');
+  const outInterets = document.getElementById('out-interets');
+  const outTotal = document.getElementById('out-total');
+  const barPrincipal = document.getElementById('bar-principal');
+  const barInterets = document.getElementById('bar-interets');
+
+  function formatEUR(n) {
+    return Math.round(n).toLocaleString('fr-FR') + ' €';
+  }
+
+  function compute() {
+    const capital = parseFloat(capitalEl.value) || 0;
+    const versement = parseFloat(versementEl.value) || 0;
+    const tauxAnnuel = parseFloat(tauxEl.value) / 100;
+    const annees = parseFloat(dureeEl.value) || 1;
+    const n = annees * 12;
+    const r = tauxAnnuel / 12;
+
+    let c1, c2;
+    if (r === 0) {
+      c1 = capital;
+      c2 = versement * n;
+    } else {
+      c1 = capital * Math.pow(1 + r, n);
+      c2 = versement * ((Math.pow(1 + r, n) - 1) / r);
+    }
+
+    const total = c1 + c2;
+    const totalVerse = capital + versement * n;
+    const interets = total - totalVerse;
+
+    tauxVal.textContent = tauxAnnuel * 100 === Math.round(tauxAnnuel * 100) ? (tauxAnnuel*100).toFixed(0) + ' %' : (tauxAnnuel*100).toFixed(1) + ' %';
+    dureeVal.textContent = annees + (annees > 1 ? ' ans' : ' an');
+
+    outVerse.textContent = formatEUR(totalVerse);
+    outInterets.textContent = formatEUR(interets);
+    outTotal.textContent = formatEUR(total);
+
+    const pctVerse = total > 0 ? Math.max(0, Math.min(100, (totalVerse / total) * 100)) : 50;
+    const pctInterets = 100 - pctVerse;
+    barPrincipal.style.width = pctVerse + '%';
+    barInterets.style.width = pctInterets + '%';
+  }
+
+  [capitalEl, versementEl, tauxEl, dureeEl].forEach(el => el.addEventListener('input', compute));
+  compute();
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

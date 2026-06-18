@@ -1,0 +1,22 @@
+{
+  "slug": "comment-calculer-son-tjm-freelance",
+  "title": "Comment calculer son TJM quand on devient freelance",
+  "excerpt": "Le taux journalier moyen ne se choisit pas au hasard ni en copiant le tarif d'un confrère. Voici la méthode pour partir d'un salaire net visé et obtenir un chiffre que vous pouvez défendre face à un client.",
+  "date": "2026-05-12",
+  "readingTime": "6 min",
+  "folio": "B-01",
+  "relatedTool": { "href": "calculateur-tjm.html", "label": "Simulateur de TJM" },
+  "content": [
+    { "type": "p", "text": "La première erreur, en passant freelance, est de regarder ce que facturent les autres et de se positionner « un peu en dessous, pour être sûr de décrocher des missions ». Ce raisonnement part du marché plutôt que de vos propres besoins, et il mène presque toujours au même résultat : un TJM trop bas pour vivre correctement de son activité une fois les charges et les périodes sans mission prises en compte." },
+    { "type": "h2", "text": "Partir du salaire, pas du marché" },
+    { "type": "p", "text": "La bonne question n'est pas « combien facturent les autres » mais « combien dois-je facturer pour atteindre le salaire net que je vise ». Cette inversion change tout : le TJM devient une conséquence de vos objectifs personnels, pas une estimation à la louche calée sur la concurrence." },
+    { "type": "p", "text": "Concrètement, trois informations suffisent pour démarrer le calcul : le salaire net mensuel que vous voulez toucher, le taux de charges de votre statut (très différent entre micro-entreprise et portage salarial), et le nombre de jours que vous pensez réellement facturer chaque mois, une fois retirées la prospection, l'administratif et les creux d'activité." },
+    { "type": "h2", "text": "Le piège du nombre de jours facturables" },
+    { "type": "p", "text": "C'est souvent ici que le calcul dérape. Un mois compte environ 20 à 22 jours ouvrés, mais un freelance ne facture quasiment jamais la totalité de ces jours à un client. Il faut prospecter, gérer la facturation, se former, parfois attendre entre deux missions. En début d'activité, 10 à 12 jours facturables par mois est déjà un bon rythme ; un freelance expérimenté avec un portefeuille clients stable peut monter à 16-18 jours." },
+    { "type": "p", "text": "Diviser son objectif de revenu par 20 jours plutôt que par 12 conduit à sous-évaluer son TJM d'environ 40 %, un écart qui se paie cash en fin de mois." },
+    { "type": "h2", "text": "Ajouter une marge de sécurité" },
+    { "type": "p", "text": "Une fois le calcul de base fait, il est utile d'ajouter une marge de 10 à 20 % pour absorber les aléas : un client qui paie en retard, un mois plus creux que prévu, une formation à financer. Cette marge n'est pas un luxe, c'est ce qui sépare un TJM viable sur la durée d'un TJM qui ne tient que si tout se passe parfaitement." },
+    { "type": "h2", "text": "Vérifier son chiffre avec un calcul transparent" },
+    { "type": "p", "text": "Le simulateur de TJM du Registre applique exactement cette logique en trois étapes : revenu brut nécessaire à partir du salaire net et des charges, ajout de la marge de sécurité, puis division par les jours réellement facturables. Chaque étape est visible, ce qui permet de comprendre d'où vient le chiffre final plutôt que de subir une estimation sortie d'une boîte noire." }
+  ]
+}
