@@ -65,7 +65,7 @@ const HEAD_STYLE = `
   .nav { display: flex; align-items: center; justify-content: space-between; padding: 22px 32px; max-width: 1140px; margin: 0 auto; }
   .logo { display: flex; align-items: baseline; gap: 10px; }
   .logo-mark {
-    width: 30px; height: 30px; border: 1.5px solid var(--ink); border-radius: 50%;
+    width: 30px; height: 30px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; flex-shrink: 0;
   }
@@ -98,7 +98,9 @@ const HEADER_HTML = `
 <header>
   <div class="nav">
     <a href="../index.html" class="logo">
-      <div class="logo-mark">R</div>
+      <div class="logo-mark">
+		<img src="favicon-96x96.png" alt="Logo Le Registre" width="20" height="20">
+	  </div>
       <div class="logo-text">Le Registre</div>
     </a>
     <nav class="nav-links">
