@@ -1,0 +1,28 @@
+{
+  "slug": "combien-gagne-freelance-france-2026",
+  "title": "Combien gagne un freelance en France en 2026 ?",
+  "excerpt": "Entre 2 500 € et 4 500 € net par mois en moyenne, mais la réalité est bien plus nuancée. TJM médian, statut juridique, secteur, jours facturables réels : voici ce que les chiffres 2026 disent vraiment.",
+  "date": "2026-06-27",
+  "readingTime": "7 min",
+  "folio": "B-04",
+  "relatedTool": { "href": "calculateur-tjm.html", "label": "Simulateur de TJM" },
+  "content": [
+    { "type": "p", "text": "La question revient systématiquement dès qu'on envisage de passer indépendant : combien peut-on vraiment gagner en freelance ? Les chiffres qui circulent varient considérablement selon les sources, et la plupart confondent chiffre d'affaires, revenu brut et revenu net. Voici ce que les données 2026 disent réellement." },
+    { "type": "h2", "text": "Le chiffre à retenir : entre 2 500 € et 4 500 € net par mois en moyenne" },
+    { "type": "p", "text": "Le salaire moyen d'un freelance en France se situe entre 2 500 € et 4 500 € net par mois selon les enquêtes sectorielles 2026. C'est significativement plus large qu'une grille salariale classique, et c'est normal : ces chiffres agrègent des profils très différents, du développeur senior en Île-de-France au consultant junior en région qui démarre son activité." },
+    { "type": "p", "text": "Ce qu'il faut comprendre dès le départ : le revenu d'un freelance n'est pas son chiffre d'affaires. Ce que vous facturez à vos clients, c'est votre CA brut. Ce qui arrive réellement sur votre compte, c'est ce qui reste après les charges sociales, les frais professionnels et les impôts — soit souvent 40 à 75 % de moins que le CA encaissé, selon votre statut." },
+    { "type": "h2", "text": "Le TJM médian en France en 2026" },
+    { "type": "p", "text": "Le taux journalier moyen (TJM) est l'unité de référence du freelancing en France. En 2026, le TJM médian tous secteurs confondus se situe entre 400 et 600 € par jour selon le baromètre TJM 2026. Dans la tech spécifiquement, il monte à 520 € par jour en moyenne (données Malt, Free-Work et Hays France), avec des écarts très importants selon la spécialisation." },
+    { "type": "p", "text": "Les fourchettes par secteur donnent une image plus précise : les profils IA et machine learning atteignent 750 à 1 500 €/jour, le développement web se positionne entre 350 et 750 €/jour, la cybersécurité entre 530 et 750 €/jour selon l'expérience, et le cloud entre 580 et 780 €/jour pour un profil architecte. À l'autre extrémité, les métiers créatifs ou administratifs moins spécialisés restent souvent sous les 400 €/jour." },
+    { "type": "h2", "text": "Paris vs régions : un écart persistant" },
+    { "type": "p", "text": "La localisation reste un facteur significatif même à l'ère du télétravail généralisé. Les TJM pratiqués en Île-de-France sont en moyenne supérieurs de 5 à 10 % à ceux des régions selon les données Hays 2026 : environ 620 €/jour à Paris contre 450 à 540 €/jour en régions pour des profils équivalents. L'essor du télétravail a partiellement réduit cet écart — 73 % des freelances IT travaillent désormais en distanciel au moins 3 jours par semaine — mais ne l'a pas effacé." },
+    { "type": "h2", "text": "Le vrai frein : les jours facturables réels" },
+    { "type": "p", "text": "L'erreur la plus fréquente lors du passage en freelance est de multiplier son TJM par les 251 jours ouvrés de l'année 2026 pour estimer son revenu annuel. En réalité, un freelance facture entre 150 et 180 jours par an en moyenne, soit 12 à 15 jours par mois. Les jours restants partent en prospection, en administratif, en formation, en congés non payés et en périodes sans mission — particulièrement fréquentes en début d'activité." },
+    { "type": "p", "text": "Un développeur à 550 €/jour qui pense gagner 138 000 € par an (550 × 251) touche en réalité entre 82 500 € et 99 000 € de CA brut sur une base de 150 à 180 jours facturables réels — et son revenu net sera encore significativement inférieur à ce montant selon son statut juridique." },
+    { "type": "h2", "text": "L'impact massif du statut juridique" },
+    { "type": "p", "text": "À TJM et volume d'activité identiques, le statut juridique peut faire varier le revenu net de plusieurs centaines d'euros par mois. Les trois statuts principaux en France : la micro-entreprise (cotisations d'environ 21 à 25 % du CA selon l'activité, plafond à 77 700 € de CA annuel pour les prestations de services), la SASU ou EURL à l'IS (environ 50 % de charges globales sur le CA, mais optimisation possible via les dividendes), et le portage salarial (52 à 55 % de charges avec les frais de gestion, mais statut de salarié avec droit au chômage)." },
+    { "type": "p", "text": "Un même chiffre d'affaires de 120 000 € peut ainsi générer entre 47 000 € net en portage salarial et plus de 80 000 € net selon le statut et les optimisations fiscales choisies. Le choix du statut est donc au moins aussi important que le niveau du TJM pour comprendre ce qu'on gagne réellement." },
+    { "type": "h2", "text": "Calculer son propre chiffre" },
+    { "type": "p", "text": "Plutôt que de partir des moyennes du marché, la bonne approche consiste à raisonner à l'envers : quel salaire net voulez-vous toucher chaque mois ? À partir de ce chiffre, on remonte vers le TJM nécessaire en ajoutant les charges sociales, une marge de sécurité, et en divisant par un nombre de jours facturables réaliste. C'est exactement la logique du simulateur de TJM du Registre, dont la formule de calcul est entièrement visible : salaire net visé divisé par (1 moins le taux de charges), multiplié par la marge de sécurité, divisé par les jours facturables." }
+  ]
+}

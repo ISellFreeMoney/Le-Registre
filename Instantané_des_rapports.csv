@@ -1,0 +1,90 @@
+# ----------------------------------------
+# Instantané des rapports
+# Compte : Les Registres
+# Propriété : Les Registres
+# ----------------------------------------
+#  
+# Date de début : 20260524
+# Date de fin : 20260620
+Utilisateurs actifs,Nouveaux utilisateurs,Durée d'engagement moyenne par utilisateur actif,Nombre d'événements
+15,15,14.466666666666667,100
+
+#  
+# Date de début : 20260524
+# Date de fin : 20260620
+Titre de la page et classe de l'écran,Vues,Utilisateurs actifs,Nombre d'événements,Taux de rebond
+Le Registre — Outils de calcul pour indépendants,25,15,78,0.65
+Simulateur de TJM — Le Registre,5,1,10,0
+Calculateur d'épargne — Le Registre,1,1,2,0
+Comparateur portage salarial — Le Registre,1,1,2,0
+Le journal — Le Registre,1,1,3,0
+Portage salarial ou micro-entreprise : ce qui change vraiment sur le revenu net — Le Registre,1,1,3,0
+Simulateur de mensualités — Le Registre,1,1,2,0
+
+#  
+# Date de début : 20260524
+# Date de fin : 20260620
+Première combinaison source/support de l'utilisateur,Utilisateurs actifs
+(direct) / (none),15
+
+#  
+# Date de début : 20260524
+# Date de fin : 20260620
+Source/Support de la session,Sessions
+(direct) / (none),21
+
+#  
+# Date de début : 20260524
+# Date de fin : 20260620
+Nième jour,new,returning
+0000,0,0
+0001,0,0
+0002,0,0
+0003,0,0
+0004,0,0
+0005,0,0
+0006,0,0
+0007,0,0
+0008,0,0
+0009,0,0
+0010,0,0
+0011,0,0
+0012,0,0
+0013,0,0
+0014,0,0
+0015,0,0
+0016,0,0
+0017,0,0
+0018,0,0
+0019,0,0
+0020,0,0
+0021,0,0
+0022,0,0
+0023,0,0
+0024,0,0
+0025,0,0
+0026,8,1
+0027,7,1
+
+# Quelle est l'activité des utilisateurs sur les différentes plates-formes ?
+# Date de début : 20260524
+# Date de fin : 20260620
+Plate-forme,Événements clés
+
+
+#  
+# Date de début : 20260524
+# Date de fin : 20260620
+Ville,Utilisateurs actifs
+Santa Clara,2
+Amsterdam,1
+Boardman,1
+Cherbourg-en-Cotentin,1
+Dublin,1
+Frankfurt am Main,1
+
+#  
+# Date de début : 20260524
+# Date de fin : 20260620
+Nom de l'audience,Utilisateurs actifs
+All Users,15
